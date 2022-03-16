@@ -154,7 +154,6 @@ services:
     ipv4_address: 10.10.0.4
     aliases:
      - zabbix-web-nginx-pgsql.local
-   zbx_net_frontend:
   stop_grace_period: 10s
   sysctls:
    - net.core.somaxconn=65535
@@ -306,7 +305,7 @@ services:
 
  # =db
  db:
-  image: "postgres:11"
+  image: "postgres:13"
   container_name: "zabbix-db"
 #  environment:
 #   - POSTGRES_PASSWORD=${APP_DB_ROOT_PASSWORD}
