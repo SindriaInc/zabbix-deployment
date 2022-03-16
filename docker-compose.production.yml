@@ -103,7 +103,6 @@ services:
     ipv4_address: 10.10.0.3
     aliases:
      - zabbix-proxy-sqlite3.local
-   zbx_net_frontend:
   stop_grace_period: 30s
   labels:
    com.zabbix.description: "Zabbix proxy with SQLite3 database support"
