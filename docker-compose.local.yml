@@ -305,6 +305,30 @@ services:
    com.zabbix.component: "web-service"
    com.zabbix.os: "alpine"
 
+ # =db
+ db:
+  image: "postgres:11"
+  container_name: "zabbix-db"
+  environment:
+   - POSTGRES_PASSWORD=${APP_DB_ROOT_PASSWORD}
+   - POSTGRES_DB=${APP_DB_DATABASE}
+   - POSTGRES_USER=${APP_DB_USERNAME}
+  volumes:
+   - "db:/var/lib/postgresql/data"
+  hostname: "zabbix-db.local"
+  env_file:
+   - ./env_vars/.env_db_pgsql
+  secrets:
+   - POSTGRES_USER
+   - POSTGRES_PASSWORD
+  #ports:
+  #  - "5432:5432"
+  networks:
+   default:
+    ipv4_address: 10.10.0.9
+    aliases:
+     - "zabbix-db.local"
+
 
 # =networks
 networks:
@@ -320,18 +344,11 @@ networks:
 
 # =volumes
 volumes:
+  db:
   snmptraps:
 
 # =secrets
 secrets:
-  MYSQL_USER:
-    file: ./env_vars/.MYSQL_USER
-  MYSQL_PASSWORD:
-    file: ./env_vars/.MYSQL_PASSWORD
-  MYSQL_ROOT_USER:
-    file: ./env_vars/.MYSQL_ROOT_USER
-  MYSQL_ROOT_PASSWORD:
-    file: ./env_vars/.MYSQL_ROOT_PASSWORD
   POSTGRES_USER:
     file: ./env_vars/.POSTGRES_USER
   POSTGRES_PASSWORD:
