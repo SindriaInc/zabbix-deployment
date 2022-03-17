@@ -21,19 +21,20 @@ services:
 #   - ./env_vars/.ZBX_DB_CA_FILE:/run/secrets/root-ca.pem:ro
 #   - ./env_vars/.ZBX_DB_CERT_FILE:/run/secrets/client-cert.pem:ro
 #   - ./env_vars/.ZBX_DB_KEY_FILE:/run/secrets/client-key.pem:ro
+  hostname: "zabbix-server.local"
   ulimits:
    nproc: 65535
    nofile:
     soft: 20000
     hard: 40000
-  deploy:
-   resources:
-    limits:
-      cpus: '0.70'
-      memory: 1G
-    reservations:
-      cpus: '0.5'
-      memory: 512M
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.70'
+#      memory: 1G
+#    reservations:
+#      cpus: '0.5'
+#      memory: 512M
   env_file:
    - ./env_vars/.env_db_pgsql
    - ./env_vars/.env_srv
@@ -79,19 +80,20 @@ services:
    - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
    - ./zbx_env/var/lib/zabbix/mibs:/var/lib/zabbix/mibs:ro
    - snmptraps:/var/lib/zabbix/snmptraps:rw
+  hostname: "zabbix-proxy-sqlite3.local"
   ulimits:
    nproc: 65535
    nofile:
     soft: 20000
     hard: 40000
-  deploy:
-   resources:
-    limits:
-      cpus: '0.70'
-      memory: 512M
-    reservations:
-      cpus: '0.3'
-      memory: 256M
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.70'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.3'
+#      memory: 256M
   env_file:
    - ./env_vars/.env_prx
    - ./env_vars/.env_prx_sqlite3
@@ -126,14 +128,15 @@ services:
 #   - ./env_vars/.ZBX_DB_CA_FILE:/run/secrets/root-ca.pem:ro
 #   - ./env_vars/.ZBX_DB_CERT_FILE:/run/secrets/client-cert.pem:ro
 #   - ./env_vars/.ZBX_DB_KEY_FILE:/run/secrets/client-key.pem:ro
-  deploy:
-   resources:
-    limits:
-      cpus: '0.70'
-      memory: 512M
-    reservations:
-      cpus: '0.5'
-      memory: 256M
+  hostname: "zabbix-web-nginx-pgsql.local"
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.70'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.5'
+#      memory: 256M
   env_file:
    - ./env_vars/.env_db_pgsql
    - ./env_vars/.env_web
@@ -181,15 +184,16 @@ services:
    - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
    - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
    - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
-  deploy:
-   resources:
-    limits:
-      cpus: '0.2'
-      memory: 128M
-    reservations:
-      cpus: '0.1'
-      memory: 64M
-   mode: global
+  hostname: "zabbix-agent.local"
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.2'
+#      memory: 128M
+#    reservations:
+#      cpus: '0.1'
+#      memory: 64M
+#   mode: global
   env_file:
    - ./env_vars/.env_agent
   privileged: true
@@ -215,16 +219,17 @@ services:
    - all
   ports:
    - "10052:10052"
-  deploy:
-   resources:
-    limits:
-      cpus: '0.5'
-      memory: 512M
-    reservations:
-      cpus: '0.25'
-      memory: 256M
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.5'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.25'
+#      memory: 256M
   env_file:
    - ./env_vars/.env_java
+  hostname: "zabbix-java-gateway.local"
   networks:
    default:
     ipv4_address: 10.10.0.6
@@ -248,14 +253,15 @@ services:
    - "162:1162/udp"
   volumes:
    - snmptraps:/var/lib/zabbix/snmptraps:rw
-  deploy:
-   resources:
-    limits:
-      cpus: '0.5'
-      memory: 256M
-    reservations:
-      cpus: '0.25'
-      memory: 128M
+  hostname: "zabbix-snmptraps.local"
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.5'
+#      memory: 256M
+#    reservations:
+#      cpus: '0.25'
+#      memory: 128M
   networks:
    default:
     ipv4_address: 10.10.0.7
@@ -281,14 +287,15 @@ services:
    - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
   cap_add:
    - SYS_ADMIN
-  deploy:
-   resources:
-    limits:
-      cpus: '0.5'
-      memory: 512M
-    reservations:
-      cpus: '0.25'
-      memory: 256M
+#  deploy:
+#   resources:
+#    limits:
+#      cpus: '0.5'
+#      memory: 512M
+#    reservations:
+#      cpus: '0.25'
+#      memory: 256M
+  hostname: "zabbix-web-service.local"
   env_file:
    - ./env_vars/.env_web_service
   networks:
