@@ -96,7 +96,6 @@ services:
 #      memory: 256M
   env_file:
    - ./env_vars/.env_prx
-   - ./env_vars/.env_prx_sqlite3
   depends_on:
    - java_gateway
    - snmptraps
