@@ -41,8 +41,8 @@ services:
   secrets:
    - POSTGRES_USER
    - POSTGRES_PASSWORD
-  #depends_on:
-  # - postgres-server
+  depends_on:
+   - db
   networks:
    default:
     ipv4_address: 10.10.0.2
@@ -97,9 +97,9 @@ services:
   env_file:
    - ./env_vars/.env_prx
    - ./env_vars/.env_prx_sqlite3
-  #depends_on:
-  # - zabbix-java-gateway
-  # - zabbix-snmptraps
+  depends_on:
+   - java_gateway
+   - snmptraps
   networks:
    default:
     ipv4_address: 10.10.0.3
@@ -143,9 +143,9 @@ services:
   secrets:
    - POSTGRES_USER
    - POSTGRES_PASSWORD
-  #depends_on:
-  # - postgres-server
-  # - zabbix-server
+  depends_on:
+   - db
+   - server
   healthcheck:
    test: ["CMD", "curl", "-f", "http://localhost:8080/"]
    interval: 10s
@@ -314,10 +314,6 @@ services:
  db:
   image: "postgres:13"
   container_name: "zabbix-db"
-#  environment:
-#   - POSTGRES_PASSWORD=${APP_DB_ROOT_PASSWORD}
-#   - POSTGRES_DB=${APP_DB_DATABASE}
-#   - POSTGRES_USER=${APP_DB_USERNAME}
   volumes:
    - "db:/var/lib/postgresql/data"
   hostname: "zabbix-db.local"
