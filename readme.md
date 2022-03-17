@@ -19,3 +19,18 @@
 - Clean up local repo: `rm -Rf .git`
 - Setup compose: `cp docker-compose.local.yml docker-compose.yml`
 - Apply deployment: `docker-compose up -d`
+
+# Tips and Tricks
+
+- Watch logs: `docker-compose logs -f`
+- Watch logs of specific service: `docker-compose logs -f <service>`
+- Destroy env: `docker-compose down`
+- Destroy all: `docker-compose down -v`
+
+N.B. if one or more services doesn't start, run following commands:
+
+1.`docker-compose up -d proxy`
+
+2.`docker-compose up -d web_service`
+
+3.`docker-compose up -d agent`
