@@ -1,5 +1,7 @@
 # Zabbix Deployment
 
+Zabbix deployment ready for production and local environments.
+
 ## Deploy production environment
 
 - Create AWS Postgres RDS instance
