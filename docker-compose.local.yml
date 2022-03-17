@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
- # =zabbix-server
- zabbix-server:
+ # =server
+ server:
   image: zabbix/zabbix-server-pgsql:alpine-6.0-latest
   container_name: "zabbix-server"
   ports:
@@ -63,8 +63,8 @@ services:
    com.zabbix.dbtype: "pgsql"
    com.zabbix.os: "alpine"
 
- # =zabbix-proxy-sqlite3
- zabbix-proxy-sqlite3:
+ # =proxy
+ proxy:
   image: zabbix/zabbix-proxy-sqlite3:alpine-6.0-latest
   container_name: "zabbix-proxy-sqlite3"
   profiles:
@@ -113,8 +113,8 @@ services:
    com.zabbix.dbtype: "sqlite3"
    com.zabbix.os: "alpine"
 
- # =zabbix-web-nginx-pgsql
- zabbix-web-nginx-pgsql:
+ # =web
+ web:
   image: zabbix/zabbix-web-nginx-pgsql:alpine-6.0-latest
   container_name: "zabbix-web-nginx-pgsql"
   ports:
@@ -168,8 +168,8 @@ services:
    com.zabbix.dbtype: "pgsql"
    com.zabbix.os: "alpine"
 
- # =zabbix-agent
- zabbix-agent:
+ # =agent
+ agent:
   image: zabbix/zabbix-agent:alpine-6.0-latest
   container_name: "zabbix-agent"
   profiles:
@@ -210,8 +210,8 @@ services:
    com.zabbix.component: "zabbix-agentd"
    com.zabbix.os: "alpine"
 
- # =zabbix-java-gateway
- zabbix-java-gateway:
+ # =java_gateway
+ java_gateway:
   image: zabbix/zabbix-java-gateway:alpine-6.0-latest
   container_name: "zabbix-java-gateway"
   profiles:
@@ -242,8 +242,8 @@ services:
    com.zabbix.component: "java-gateway"
    com.zabbix.os: "alpine"
 
- # =zabbix-snmptraps
- zabbix-snmptraps:
+ # =snmptraps
+ snmptraps:
   image: zabbix/zabbix-snmptraps:alpine-6.0-latest
   container_name: "zabbix-snmptraps"
   profiles:
@@ -274,8 +274,8 @@ services:
    com.zabbix.component: "snmptraps"
    com.zabbix.os: "alpine"
 
- # =zabbix-web-service
- zabbix-web-service:
+ # =web_service
+ web_service:
   image: zabbix/zabbix-web-service:alpine-6.0-latest
   container_name: "zabbix-web-service"
   profiles:
