@@ -116,9 +116,9 @@ services:
  web:
   image: zabbix/zabbix-web-nginx-pgsql:alpine-6.0-latest
   container_name: "zbx-web"
-  ports:
-   - "80:8080"
-   - "443:8443"
+  #ports:
+  # - "80:8080"
+  # - "443:8443"
   volumes:
    - /etc/localtime:/etc/localtime:ro
    - /etc/timezone:/etc/timezone:ro
